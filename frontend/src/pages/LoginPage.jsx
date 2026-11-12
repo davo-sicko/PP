@@ -10,14 +10,22 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [serverError, setServerError] = useState('');
 
-  const onSubmit = async (data) => {
+    const onSubmit = async (data) => {
     try {
       setServerError('');
-      const response = await api.post('/auth/login', data);
-      setAuth({ user: response.data.user, accessToken: response.data.accessToken });
+      // ВРЕМЕННАЯ ЗАГЛУШКА
+      setAuth({ 
+        user: { 
+          id: 1, 
+          displayName: 'Иван Тестов', 
+          username: data.login,
+          avatar: 'https://i.pravatar.cc/150?u=test'
+        }, 
+        accessToken: 'fake-token' 
+      });
       navigate('/');
     } catch (error) {
-      setServerError(error.response?.data?.error || 'Ошибка входа. Проверьте данные.');
+      setServerError(error.response?.data?.error || 'Ошибка входа.');
     }
   };
 

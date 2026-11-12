@@ -9,6 +9,12 @@ import MainLayout from './components/layout/MainLayout';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage';
+import MusicPage from './pages/MusicPage';
+import MessagesPage from './pages/MessagesPage';
+import VideoPage from './pages/VideoPage';
+import ImagesPage from './pages/ImagesPage';
+import NewsPage from './pages/NewsPage';
 
 export default function App() {
   const { setAuth, clearAuth, setInitialized } = useAuthStore();
@@ -16,15 +22,18 @@ export default function App() {
   // Проверка сессии при загрузке приложения (перезагрузка страницы)
   useEffect(() => {
     const initAuth = async () => {
+      /* ВРЕМЕННО ОТКЛЮЧЕНО
       try {
-        // Если есть httpOnly cookie, бэкенд вернет новый access token
         const { data } = await api.post('/auth/refresh');
         setAuth({ user: data.user, accessToken: data.accessToken });
       } catch (error) {
-        clearAuth(); // Сессии нет
+        clearAuth();
       } finally {
-        setInitialized(); // Готово, можно рендерить роутер
+        setInitialized();
       }
+      */
+     // Вместо этого сразу говорим, что инициализация прошла
+     setInitialized(); 
     };
     initAuth();
   }, [setAuth, clearAuth, setInitialized]);
@@ -40,13 +49,12 @@ export default function App() {
         <Route element={<PrivateRoute />}>
           <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
-            {/* Заглушки для остальных разделов */}
-            <Route path="/messages" element={<div className="p-4">Мессенджер в разработке</div>} />
-            <Route path="/music" element={<div className="p-4">Музыка в разработке</div>} />
-            <Route path="/video" element={<div className="p-4">Видео в разработке</div>} />
-            <Route path="/images" element={<div className="p-4">Изображения в разработке</div>} />
-            <Route path="/news" element={<div className="p-4">Новости в разработке</div>} />
-            <Route path="/profile" element={<div className="p-4">Профиль в разработке</div>} />
+            <Route path="/messages" element={<MessagesPage />} />
+            <Route path="/music" element={<MusicPage />} />
+            <Route path="/video" element={<VideoPage />} />
+            <Route path="/images" element={<ImagesPage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Route>
         </Route>
         

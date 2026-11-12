@@ -13,14 +13,30 @@ export default function RegisterPage() {
   
   const password = watch('password');
 
-  const onSubmit = async (data) => {
+    const onSubmit = async (data) => {
     try {
       setServerError('');
+      // ВРЕМЕННАЯ ЗАГЛУШКА (пока нет бэкенда)
+      // Мы просто берем данные из формы и пускаем пользователя внутрь
+      setAuth({ 
+        user: { 
+          id: 1, 
+          displayName: data.displayName, 
+          username: data.username,
+          avatar: 'https://i.pravatar.cc/150?u=test' // Фейковая аватарка
+        }, 
+        accessToken: 'fake-token' 
+      });
+      navigate('/');
+      
+      /* 
+      // КОГДА БУДЕТ БЭКЕНД, РАСКОММЕНТИРУЙТЕ ЭТО:
       const response = await api.post('/auth/register', data);
       setAuth({ user: response.data.user, accessToken: response.data.accessToken });
       navigate('/');
+      */
     } catch (error) {
-      setServerError(error.response?.data?.error || 'Ошибка регистрации. Попробуйте позже.');
+      setServerError(error.response?.data?.error || 'Ошибка регистрации.');
     }
   };
 
