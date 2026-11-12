@@ -1,16 +1,25 @@
 @import "tailwindcss";
+
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900 font-sans antialiased;
+    /* Очень темный, почти черный фон */
+    @apply bg-[#0a0a0a] text-white font-sans antialiased selection:bg-rose-500 selection:text-white;
   }
 }
 
-/* Кастомные стили для инпутов, чтобы не дублировать классы */
 @layer components {
+  /* Инпуты в темном стиле */
   .input-field {
-    @apply w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all;
+    @apply w-full px-4 py-3 mt-1 bg-[#141414] border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition-all;
   }
+  
+  /* Главная кнопка с фирменным градиентом LOCO */
   .btn-primary {
-    @apply w-full px-4 py-2 font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all disabled:opacity-50;
+    @apply w-full px-4 py-3 font-bold text-white bg-gradient-to-r from-orange-500 to-rose-600 rounded-xl hover:from-orange-400 hover:to-rose-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a] transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(249,115,22,0.3)];
+  }
+  
+  /* Карточки (для постов, чатов и т.д.) */
+  .card-dark {
+    @apply bg-[#141414] border border-zinc-800/50 rounded-2xl shadow-lg;
   }
 }
